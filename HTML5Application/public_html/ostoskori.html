@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<title>Rakennustarvike ylijäämä</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles_black.css">
+<link rel="stylesheet" href="ostoskori.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+.w3-sidebar {
+  z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <a href="index.html" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
+    <a href="mypage.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Oma sivu</a>
+    <a href="ostoskori.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Ostoskori</a>
+    <a href="kauppa.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Menu</a>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+    <i class="fa fa-remove"></i>
+  </a>
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Profiili</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Haku</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Selaa</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Omat listaukset</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Uusi listaus</a>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+
+    <div class="w3-row w3-padding-32">
+        <p class="w3-border w3-padding-large w3-padding-32">Mainos</p>
+        <input type="text" class="input-text" placeholder="Pikahaku">
+    </div>
+
+    <!-- Ostoskori -->
+ 
+    <div class="basket">
+      <div class="basket-module">
+        <label for="promo-code">Promo koodi</label>
+        <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+        <button class="promo-code-cta">Laita</button>
+      </div>
+      <div class="basket-labels">
+        <ul>
+          <li class="item item-heading">Tuotteet</li>
+          <li class="price">Hinta</li>
+          <li class="quantity">Määrä</li>
+          <li class="subtotal">Summa</li>
+        </ul>
+      </div>
+      <div class="basket-product">
+        <div class="item">
+          <div class="product-image">
+            <img src="placeholder.png" alt="Placholder Image 2" class="product-frame">
+          </div>
+          <div class="product-details">
+            <h1><strong><span class="item-quantity">1</span> x Sementtisäkkiä</strong> Extra Strong</h1>
+            <p><strong>10kg</strong></p>
+            <p>Product Code - 23239</p>
+          </div>
+        </div>
+        <div class="price">26.00</div>
+        <div class="quantity">
+          <input type="number" value="1" min="1" class="quantity-field">
+        </div>
+        <div class="subtotal">26.00</div>
+        <div class="remove">
+          <button>Poista</button>
+        </div>
+      </div>
+      </div>
+    <aside>
+      <div class="summary">
+        <div class="summary-total-items"><span class="total-items"></span>Tuotteet ostoskorissasi</div>
+        <div class="summary-subtotal">
+          <div class="subtotal-title">Summa</div>
+          <div class="subtotal-value final-value" id="basket-subtotal">26.00</div>
+          <div class="summary-promo hide">
+            <div class="promo-title">Promo</div>
+            <div class="promo-value final-value" id="basket-promo"></div>
+          </div>
+        </div>
+        <div class="summary-delivery">
+          <select name="delivery-collection" class="summary-delivery-selection">
+              <option value="0" selected="selected">Valitse noutotapa</option>
+             <option value="collection">Myymälästä</option>
+             <option value="first-class">Kotiinkuljetus</option>
+             <option value="second-class">Postitse</option>
+          </select>
+        </div>
+        <div class="summary-total">
+          <div class="total-title">Summa</div>
+          <div class="total-value final-value" id="basket-total">26.00</div>
+        </div>
+        <div class="summary-checkout">
+          <button class="checkout-cta">Maksa tästä</button>
+        </div>
+      </div>
+        </aside>
+        <!-- Ostoskori -->
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+     </div>
+    <div class="w3-third w3-container">
+    </div>
+  </div>
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+    </div>
+    <div class="w3-third w3-container">
+    </div>
+  </div>
+
+  <!-- Pagination -->
+
+  <footer class="footer">
+  <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="link-area">
+                    <h3>TIETOA MEISTÄ</h3>
+                    <P>On vaikeeta tää työnteko</P>
+                    <li class="fa-li"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li class="fa-li"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li class="fa-li"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="link-area">
+                    <h3>TUOTTEET</h3>
+                    <ul>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="link-area">
+                    <h3>YRITYS</h3>
+                    <ul>
+                    <li><a href="#"> Home</a></li>
+                    <li><a href="#"> Blog</a></li>
+                    <li><a href="#"> About</a></li>
+                    <li><a href="#"> contact</a></li>
+                    <li><a href="#"> Jobs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="link-area">
+                    <h3>OPI LISÄÄ</h3>
+                    <ul>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    <li><a href="#"> Services-1</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+
+<!-- END MAIN -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
